@@ -1,0 +1,33 @@
+language: node_js
+node_js:
+- '8'
+cache:
+  directories:
+    - node_modules
+
+addons:
+  chrome: stable
+
+sudo: required
+before_install:
+before_script:
+  - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
+  - docker-compose up
+script:
+  - npm test
+
+services:
+  - docker
+  - docker-compose
+
+after_success:
+  # deploy. Joona fixaa vuoden päästä.
+  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker build -t toska/oodikone2-frontend:testing ."
+  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
+  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker push toska/oodikone2-frontend:testing"
+  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker build -t toska/oodikone2-frontend:staging ."
+  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
+  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker push toska/oodikone2-frontend:staging"
+  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker build -t toska/oodikone2-frontend:latest ."
+  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
+  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker push toska/oodikone2-frontend:latest"
