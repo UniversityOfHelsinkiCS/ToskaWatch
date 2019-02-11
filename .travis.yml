@@ -12,14 +12,14 @@ sudo: required
 before_install:
 before_script:
   - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
-  - bash oodikone2-cli/run.sh
+  - cd oodikone2-cli
+  - echo "1" | ./run.sh
   - docker-compose up
 script:
   - npm test
 
 services:
   - docker
-  - docker-compose
 
 after_success:
   # deploy. Joona fixaa vuoden päästä.
