@@ -11,6 +11,7 @@ jobs:
   include:
     - stage: testing
       script:
+        - docker login -u $DOCKER_USER -p $DOCKER_PASS
         - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
         - cd oodikone2-cli
         - source scripts.sh && run_e2e_setup
