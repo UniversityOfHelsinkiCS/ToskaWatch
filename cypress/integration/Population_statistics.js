@@ -11,7 +11,7 @@ describe('Population Statistics tests', () => {
         proxy.xhr.setRequestHeader('edupersonaffiliation', 'asdasd')
       }
     })
-    cy.visit("localhost", { timeout: 240000 })
+    cy.visit("localhost:6969", { timeout: 240000 })
     cy.contains("Population statistics").click()
     cy.contains("Select study programme", { timeout: 100000 })
   })
