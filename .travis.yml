@@ -1,34 +1,20 @@
-language: node_js
-node_js:
-- '8'
+sudo: required
 cache:
   directories:
-    - node_modules
-
-addons:
-  chrome: stable
-
-sudo: required
-before_install:
-before_script:
-  - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
-  - cd oodikone2-cli
-  - echo "1" | ./run.sh
-  - docker-compose up
-script:
-  - npm test
+    - '$HOME/.npm'
+    - '$HOME/.cache'
 
 services:
   - docker
 
-after_success:
-  # deploy. Joona fixaa vuoden päästä.
-  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker build -t toska/oodikone2-frontend:testing ."
-  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
-  # - "[[ $TRAVIS_BRANCH =~ (trunk) ]] && docker push toska/oodikone2-frontend:testing"
-  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker build -t toska/oodikone2-frontend:staging ."
-  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
-  # - "[[ $TRAVIS_BRANCH =~ (^master) ]] && docker push toska/oodikone2-frontend:staging"
-  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker build -t toska/oodikone2-frontend:latest ."
-  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker login -u $DOCKER_USER -p $DOCKER_PASS"
-  # - "[[ $TRAVIS_TAG =~ ([0-1].+) ]] && docker push toska/oodikone2-frontend:latest"
+jobs:
+  include:
+    - stage: testing
+      script:
+        - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
+        - cd oodikone2-cli
+        - source scripts.sh && run_e2e_setup
+        - cd ..
+        - until $(curl --output /dev/null --silent --fail http://localhost); do printf '.'; sleep 5; done
+        - CYPRESS_baseUrl=http://localhost npm run cypress:record
+

@@ -70,37 +70,4 @@ fi
 if grep -q 'access denied' /tmp/travis-request-output.$$.txt; then
     exit 1
 fi
-    MESSAGE=",\"message\": \"$4\""
-elif [ -n "$TRAVIS_REPO_SLUG" ] ; then
-    MESSAGE=",\"message\": \"Triggered by upstream build of $TRAVIS_REPO_SLUG commit "`git log --oneline -n 1 HEAD`"\""
-else
-    MESSAGE=""
-fi
-## For debugging:
-# echo "USER=$USER"
-# echo "REPO=$REPO"
-# echo "TOKEN=$TOKEN"
-# echo "MESSAGE=$MESSAGE"
 
-body="{
-\"request\": {
-  \"branch\":\"$BRANCH\"
-  $MESSAGE
-}}"
-
-# It does not work to put / in place of %2F in the URL below.  I'm not sure why.
-curl -s -X POST \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json" \
-  -H "Travis-API-Version: 3" \
-  -H "Authorization: token ${TOKEN}" \
-  -d "$body" \
-  https://api.${TRAVIS_URL}/repo/${USER}%2F${REPO}/requests \
- | tee /tmp/travis-request-output.$$.txt
-
-if grep -q '"@type": "error"' /tmp/travis-request-output.$$.txt; then
-    exit 1
-fi
-if grep -q 'access denied' /tmp/travis-request-output.$$.txt; then
-    exit 1
-fi
