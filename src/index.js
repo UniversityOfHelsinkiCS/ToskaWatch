@@ -12,8 +12,9 @@ app.post('/', (req, res) => {
   const data = JSON.parse(payload)
   console.log(data)
   const branch = data.ref.split('/')[2]
+  const repository = data.repository.name
   if (branch === 'master') {
-    const output = execSync(`./src/trigger-travis.sh UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN}`, { encoding: 'utf-8' })
+    const output = execSync(`./src/trigger-travis.sh --branch master UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN} Tests triggered by a webhook from ${repository}`, { encoding: 'utf-8' })
     console.log(output)
   }
 
