@@ -18,6 +18,6 @@ jobs:
         - cd ..
         - docker ps 
         - cat oodikone2-cli/nginx/log
-        - until $(curl --output /dev/null --silent --fail http://localhost:1337); do printf '.'; sleep 5; done
-        - CYPRESS_baseUrl=http://localhost:1337 npm run cypress:record
+        - until $(curl --output /dev/null --silent --fail http://localhost:1337/staging/); do printf '.'; sleep 5; done
+        - CYPRESS_baseUrl=http://localhost:1337/staging/ npm run cypress:record
 
