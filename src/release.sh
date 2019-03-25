@@ -1,3 +1,5 @@
+#!/bin/bash
+
 body="{
 \"request\": {
   \"stage\":\"staging\"
