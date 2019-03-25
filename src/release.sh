@@ -12,3 +12,5 @@ curl -s -X POST \
   -d "$body" \
   https://oodikone.cs.helsinki.fi/release/ \
  | tee /tmp/release-request-output.$$.txt
+
+echo /tmp/release-request-output.$$.txt

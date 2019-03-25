@@ -21,6 +21,7 @@ jobs:
         - cat oodikone2-cli/nginx/log
         - until $(curl --output /dev/null --silent --fail http://localhost:1337/staging/); do printf '.'; sleep 5; done
         - CYPRESS_baseUrl=http://localhost:1337/staging/ npm run cypress:record
+
 deploy:
   provider: script
   script: ./src/release.sh
