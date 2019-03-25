@@ -13,3 +13,4 @@ curl -s -X POST \
   https://oodikone.cs.helsinki.fi/release/ \
  | tee /tmp/release-request-output.$$.txt
 
+cat /tmp/release-request-output.$$.txt

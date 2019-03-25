@@ -24,6 +24,6 @@ jobs:
 
 deploy:
   provider: script
-  script: ./src/release.sh $TRAVIS_ACCESS_TOKEN
+  script: ./src/release.sh lol
   on:
     branch: master
