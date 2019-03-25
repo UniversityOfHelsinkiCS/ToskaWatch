@@ -14,11 +14,14 @@ app.post('/', (req, res) => {
   const { payload } = req.body
   const data = JSON.parse(payload)
   console.log(data)
-  const branch = data.ref.split('/')[2]
-  const repository = data.repository.name
-  if (branch === 'master') {
-    const output = execSync(`./src/trigger-travis.sh --branch master UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN} Tests triggered by a webhook from ${repository}`, { encoding: 'utf-8' })
-    console.log(output)
+  if (data.ref) {
+    const branch = data.ref.split('/')[2]
+    const commit_id = data.head_commit.id
+    const repository = data.repository.name
+    if (branch === 'master') {
+      const output = execSync(`./src/trigger-travis.sh --branch master UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN} "Tests triggered by a webhook from ${repository}-${commit_id}"`, { encoding: 'utf-8' })
+      console.log(output)
+    }
   }
 
   res.status(200).end()
