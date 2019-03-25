@@ -7,6 +7,10 @@ cache:
 services:
   - docker
 
+notifications:
+  webhooks:
+    urls:
+      - https://toska.cs.helsinki.fi/toskawatch/  
 jobs:
   include:
     - stage: testing
