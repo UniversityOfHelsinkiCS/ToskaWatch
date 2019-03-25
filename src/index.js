@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded())
 const PORT = process.env.PORT || '6784'
 
 app.get('/ping', (req, res) => {
-  res.status(200).message("pong")
+  res.status(200).send("pong")
 })
 app.post('/', (req, res) => {
   const { payload } = req.body
