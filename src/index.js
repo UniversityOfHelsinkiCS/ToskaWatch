@@ -27,7 +27,8 @@ app.post('/', (req, res) => {
   res.status(200).end()
 })
 app.post('/release', (req, res) => {
-  console.log(req)
+  //auth here req.headers["Authorization"]
+  console.log(req.body)
   const output = execSync(`./src/release.sh ${process.env.TRAVIS_ACCESS_TOKEN} oodikone`, { encoding: 'utf-8' })
   res.status(200).send(output)
 })
