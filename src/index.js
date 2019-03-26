@@ -12,16 +12,17 @@ app.get('/ping', (req, res) => {
   res.status(200).send("pong")
 })
 app.post('/', (req, res) => {
-  const { payload } = req.body
-  const data = JSON.parse(payload)
-  console.log(data)
-  if (data.tag === 'staging') {
-    const output = execSync(`./src/trigger-travis.sh --branch master UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN} "Tests triggered by a webhook from ${repository}-${commit_id}"`, { encoding: 'utf-8' })
+  console.log("req.body", req.body)
+  const data = req.body
+
+  if (data.push_data.tag === 'staging') {
+    const output = execSync(`./src/trigger-travis.sh --branch master UniversityOfHelsinkiCS ToskaWatch ${process.env.TRAVIS_ACCESS_TOKEN} "Tests triggered by a webhook from ${data.repository.name}"`, { encoding: 'utf-8' })
     console.log(output)
   }
   res.status(200).end()
 
 })
+
 app.post('/release', (req, res) => {
   //auth here req.headers["Authorization"]
   console.log(req.body)
