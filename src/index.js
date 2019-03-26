@@ -4,6 +4,7 @@ const execSync = require('child_process').execSync;
 
 const app = express()
 app.use(bodyParser.urlencoded())
+app.use(bodyParser.json())
 
 const PORT = process.env.PORT || '6784'
 
@@ -26,6 +27,7 @@ app.post('/', (req, res) => {
   res.status(200).end()
 })
 app.post('/release', (req, res) => {
+  console.log(req)
   const output = execSync(`./src/release.sh ${process.env.TRAVIS_ACCESS_TOKEN} oodikone`, { encoding: 'utf-8' })
   res.status(200).send(output)
 })
