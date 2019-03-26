@@ -99,7 +99,6 @@ describe('Population Statistics tests', () => {
       cy.url().should('include', '/coursestatistics')
     })
     cy.contains("DIGI-000A", { timeout: 10000 })
-    cy.contains("Searched courses").parentsUntil(".segment").contains("digitaidot").should("have.text", "Opiskelijan digitaidot: orientaatio (Keskusta)")
 
     cy.go("back")
     cy.get("button").contains("show").click()
