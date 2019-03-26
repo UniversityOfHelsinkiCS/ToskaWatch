@@ -23,8 +23,11 @@ app.post('/', (req, res) => {
       console.log(output)
     }
   }
-
   res.status(200).end()
+})
+app.post('/release', (req, res) => {
+  const output = execSync(`./src/release.sh ${process.env.TRAVIS_ACCESS_TOKEN} oodikone`, { encoding: 'utf-8' })
+  res.status(200).send(output)
 })
 
 app.listen(PORT, () => console.log(`Running in port: ${PORT}`))
