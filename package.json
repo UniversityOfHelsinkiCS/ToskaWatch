@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "cypress:open": "cypress open",
-    "cypress:run": "cypress run -P ./",
+    "cypress:open": "CYPRESS_baseUrl=http://localhost:8081 cypress open",
+    "cypress:run": "CYPRESS_baseUrl=http://localhost:8081 cypress run -P ./",
     "cypress:record": "cypress run --record -P ./"
   },
   "repository": {

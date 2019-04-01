@@ -5,13 +5,16 @@ describe('Population Statistics tests', () => {
   beforeEach(() => {
     cy.server({
       onAnyRequest: function (route, proxy) {
-        proxy.xhr.setRequestHeader('uid', 'tktl')
-        proxy.xhr.setRequestHeader('shib-session-id', 'mock-shibboleth')
-        proxy.xhr.setRequestHeader('hygroupcn', 'grp-oodikone-users')
-        proxy.xhr.setRequestHeader('edupersonaffiliation', 'asdasd')
+        if (Cypress.config().baseUrl === "http://localhost:1337/staging/") {
+          proxy.xhr.setRequestHeader('uid', 'tktl')
+          proxy.xhr.setRequestHeader('shib-session-id', 'mock-shibboleth')
+          proxy.xhr.setRequestHeader('hygroupcn', 'grp-oodikone-users')
+          proxy.xhr.setRequestHeader('edupersonaffiliation', 'asdasd')
+        }
       }
     })
-    cy.visit("localhost:1337/staging/", { timeout: 240000 })
+    console.log(Cypress.config().baseUrl)
+    cy.visit(Cypress.config().baseUrl, { timeout: 24000 })
     cy.contains("Population statistics").click()
     cy.contains("Select study programme", { timeout: 100000 })
   })
