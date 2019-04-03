@@ -15,7 +15,7 @@ describe('Population Statistics tests', () => {
     })
     console.log(Cypress.config().baseUrl)
     cy.visit(Cypress.config().baseUrl, { timeout: 24000 })
-    cy.contains("Population statistics").click()
+    cy.contains("Study programme").click().siblings().contains("Search by class").click()
     cy.contains("Select study programme", { timeout: 100000 })
   })
 
@@ -45,7 +45,7 @@ describe('Population Statistics tests', () => {
     cy.contains("See population").should('be.disabled')
     cy.url().should('include', '/populations')
     cy.contains("Search for population")
-    cy.contains("Enrollment").parent().within(() => {
+    cy.contains("Class of").parent().within(() => {
       cy.get(".form-control").as("enrollmentSelect")
     })
 
