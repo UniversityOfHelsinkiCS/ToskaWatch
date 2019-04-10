@@ -132,7 +132,7 @@ describe('Population Statistics tests', () => {
 
     checkAmountOfStudents(23)
 
-    cy.contains("started this semester").parentsUntil("form").contains("set filter").click()
+    cy.contains("this semester").parentsUntil("form").contains("set filter").click()
 
     checkAmountOfStudents(17)
 
