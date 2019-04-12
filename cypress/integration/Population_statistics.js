@@ -150,7 +150,7 @@ describe('Population Statistics tests', () => {
 
     checkAmountOfStudents(17)
 
-    cy.contains('have not transfer to').parentsUntil("form").contains("set filter").click()
+    cy.contains('transferred to').parentsUntil("form").contains("set filter").click()
 
     checkAmountOfStudents(17)
 
