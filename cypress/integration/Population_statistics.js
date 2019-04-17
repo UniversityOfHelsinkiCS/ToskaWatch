@@ -102,8 +102,13 @@ describe('Population Statistics tests', () => {
       cy.url().should('include', '/coursestatistics')
     })
     cy.contains("DIGI-000A", { timeout: 10000 })
-
     cy.go("back")
+
+    cy.contains("Courses of Population").parentsUntil(".ui.segment").parent().within(() => {
+      cy.contains("Matematiikan didaktiikka").siblings().eq(2).should("have.text", '9')
+      cy.get(".refresh").click()
+      cy.contains("Matematiikan didaktiikka").siblings().eq(2).should("have.text", '1')
+    })
     cy.get("button").contains("show").click()
     cy.contains("Student names hidden").click()
     cy.contains("Oinonen").siblings().eq(2).click()
@@ -208,7 +213,7 @@ describe('Population Statistics tests', () => {
     cy.contains("Select study programme", { timeout: 50000 }).click().siblings().contains("Kasvatustieteiden kandiohjelma").click()
     cy.contains("See population").click()
 
-    cy.contains("add").click()
+    cy.contains("add", { timeout: 20000 }).click()
     cy.contains("Advanced filters").click()
 
     cy.get('label:contains(Basic filters)').each(($f) => {
