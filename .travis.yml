@@ -13,12 +13,12 @@ jobs:
       script:
         - echo $TRAVIS_COMMIT_MESSAGE
         - docker login -u $DOCKER_USER -p $DOCKER_PASS
-        - git clone https://github.com/UniversityOfHelsinkiCS/oodikone2-cli.git
-        - cd oodikone2-cli
+        - git clone https://github.com/UniversityOfHelsinkiCS/oodikone.git
+        - cd oodikone
         - source scripts.sh && run_e2e_setup
         - cd ..
         - docker ps 
-        - cat oodikone2-cli/nginx/log
+        - cat oodikone/nginx/log
         - until $(curl --output /dev/null --silent --fail http://localhost:1337/staging/); do printf '.'; sleep 5; done
         - CYPRESS_baseUrl=http://localhost:1337/staging/ npm run cypress:record
 
