@@ -5,6 +5,4 @@ COPY . .
 
 RUN npm ci
 
-EXPOSE 6784
-
 CMD ["npm", "start"]
