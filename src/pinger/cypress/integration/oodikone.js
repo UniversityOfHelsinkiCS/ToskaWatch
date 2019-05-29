@@ -8,11 +8,7 @@ describe('Oodikone', () => {
     cy.contains('Login').click()
     cy.url().should('include', 'oodikone')
 
-    cy.contains('Student statistics').click()
-    cy.get('input[type="text"]').type('123412341234')
-    cy.contains('No search results')
-    cy.wait(1000)
-    cy.contains('No search results')
+    cy.contains('Welcome to Oodikone!').click()
   }
 
   it('tabs work in production', () => {

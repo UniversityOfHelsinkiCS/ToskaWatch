@@ -1,4 +1,4 @@
-describe('Oodikone', () => {
+describe('Grappa', () => {
   const test_tabs = (cy) => {
     cy.url().should('include', 'login.helsinki.fi')
 
@@ -8,7 +8,7 @@ describe('Oodikone', () => {
     cy.contains('Login').click()
     cy.url().should('include', 'grappa')
     cy.contains('grp-toska@helsinki.fi')
-    cy.get('option').should('have.length', 7)
+    cy.contains('Jami')
   }
   it('tabs work in production', () => {
     cy.visit("https://grappa.cs.helsinki.fi")

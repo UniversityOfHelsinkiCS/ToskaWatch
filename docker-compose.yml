@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  toskawatch:
+    build: .
+    image: toska/toskawatch
+    ports:
+      - "8092:6784"
+    container_name: toskawatch
