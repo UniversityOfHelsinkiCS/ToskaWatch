@@ -11,9 +11,10 @@ const postToSlack = async (text = 'Toskawatch broke') => {
   }
 }
 
-const runPinger = async () => {
+const runTests = async (spec) => {
   const testStatus = await cypress.run({
-    project: __dirname
+    project: __dirname,
+    spec
   })
 
   if (testStatus.totalFailed || !testStatus.totalTests) {
@@ -23,6 +24,11 @@ const runPinger = async () => {
       }
     })
   }
+}
+
+const runPinger = async () => {
+  await runTests(`${__dirname}/cypress/integration/grappa/*`)
+  await runTests(`${__dirname}/cypress/integration/oodikone/*`)
 }
 
 module.exports = runPinger;
