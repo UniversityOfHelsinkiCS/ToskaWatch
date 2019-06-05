@@ -1,5 +1,6 @@
 describe('Grappa', () => {
-  const test_tabs = (cy) => {
+  it('shows user name', () => {
+    cy.visit("https://grappa.cs.helsinki.fi/staging")
     cy.url().should('include', 'login.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username'))
@@ -9,15 +10,5 @@ describe('Grappa', () => {
     cy.url().should('include', 'grappa')
     
     cy.contains('Jami')
-  }
-
-  it('tabs work in production', () => {
-    cy.visit("https://grappa.cs.helsinki.fi")
-    test_tabs(cy)
-  })
-
-  it('tabs work in staging', () => {
-    cy.visit("https://grappa.cs.helsinki.fi/staging")
-    test_tabs(cy)
   })
 })

@@ -1,5 +1,6 @@
 describe('Oodikone', () => {
-  const test_tabs = (cy) => {
+  it('shows welcome to oodikone', () => {
+    cy.visit("https://oodikone.cs.helsinki.fi")
     cy.url().should('include', 'login.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username'))
@@ -9,15 +10,5 @@ describe('Oodikone', () => {
     cy.url().should('include', 'oodikone')
 
     cy.contains('Welcome to Oodikone!')
-  }
-
-  it('tabs work in production', () => {
-    cy.visit("https://oodikone.cs.helsinki.fi")
-    test_tabs(cy)
-  })
-
-  it('tabs work in staging', () => {
-    cy.visit("https://oodikone.cs.helsinki.fi/staging")
-    test_tabs(cy)
   })
 })

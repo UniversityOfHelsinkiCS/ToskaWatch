@@ -46,11 +46,13 @@ const runTests = async (spec) => {
 
 const runPinger = async () => {
   try {
-    await runTests(`${__dirname}/cypress/integration/grappa/*`)
-  } catch (e) { console.log('Failed to run tests for grappa') }
-  try {
-    await runTests(`${__dirname}/cypress/integration/oodikone/*`)
-  } catch (e) { console.log('Failed to run tests for oodikone') }
+    await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
+    await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
+    await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
+    await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
+  } catch (e) {
+    console.log('Failed to run tests', e)
+  }
 }
 
 module.exports = runPinger;
