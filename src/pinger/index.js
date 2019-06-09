@@ -18,7 +18,7 @@ const handleTestFailure = (testIdentifier) => {
   if (!status[testIdentifier]) return status[testIdentifier] = 1;
   const newStatus = ++status[testIdentifier]
   if (newStatus == SLACK_AT_FAILURE_COUNT) {
-    postToSlack(`Noot noot! Toskawatch has failed twice in row for ${newStatus} :penguin:`)
+    postToSlack(`Noot noot! Toskawatch has failed twice in row for ${testIdentifier} :penguin:`)
   }
 }
 
