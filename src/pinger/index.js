@@ -15,6 +15,7 @@ const postToSlack = async (text = 'Toskawatch broke') => {
 }
 
 const handleTestFailure = (testIdentifier) => {
+  console.log(`FAIL ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (!status[testIdentifier]) return status[testIdentifier] = 1;
   const newStatus = ++status[testIdentifier]
   if (newStatus == SLACK_AT_FAILURE_COUNT) {
@@ -23,7 +24,7 @@ const handleTestFailure = (testIdentifier) => {
 }
 
 const handleTestSuccess = (testIdentifier) => {
-  console.log('Handle test success')
+  console.log(`SUCCESS ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (status[testIdentifier] >= SLACK_AT_FAILURE_COUNT) {
     postToSlack(`Doot doot! ${newStatus} works! :penguin:`)
   }
