@@ -46,14 +46,20 @@ const runTests = async (spec) => {
   })
 }
 
+const asyncWait = time => new Promise((resolve) => setTimeout(() => resolve(), time))
+
 const runPinger = async () => {
   try {
     await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
+    await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
+    await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
+    await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
   } catch (e) {
     console.log('Failed to run tests', e)
+    process.exit(1)
   }
 }
 
