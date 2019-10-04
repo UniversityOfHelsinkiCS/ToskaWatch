@@ -5,4 +5,4 @@ COPY . .
 
 RUN npm ci
 
-CMD ["npm", "start"]
+CMD ["node", "node.js"]
