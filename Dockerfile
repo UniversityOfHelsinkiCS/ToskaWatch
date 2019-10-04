@@ -5,4 +5,4 @@ COPY . .
 
 RUN npm ci
 
-CMD ["node", "node.js"]
+CMD ["node", "index.js"]
