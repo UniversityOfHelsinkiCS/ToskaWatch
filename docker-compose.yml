@@ -1,8 +1,9 @@
-version: '3.4'
+version: '3.7'
 
 services:
   toskawatch:
     build: .
+    init: true
     image: toska/toskawatch
     ports:
       - "8092:6784"
