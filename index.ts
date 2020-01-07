@@ -1,3 +1,6 @@
+if (process.env.NODE_ENV === 'development') {
+  require('dotenv').config()
+}
 import { scheduleJob } from 'node-schedule'
 import { runPinger } from './src/pinger'
 
