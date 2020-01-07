@@ -5,7 +5,7 @@ const status = {}
 const SLACK_AT_FAILURE_COUNT = 2
 
 const postToSlack = async (text = 'Toskawatch broke') => {
-  if (!process.env.SLACK_HOOK) return;
+  if (!process.env.SLACK_HOOK) return
 
   try {
     await axios.post(process.env.SLACK_HOOK, { text })
@@ -14,16 +14,16 @@ const postToSlack = async (text = 'Toskawatch broke') => {
   }
 }
 
-const handleTestFailure = (testIdentifier) => {
+const handleTestFailure = testIdentifier => {
   console.log(`FAIL ${testIdentifier} with ${status[testIdentifier]} failures`)
-  if (!status[testIdentifier]) return status[testIdentifier] = 1;
+  if (!status[testIdentifier]) return (status[testIdentifier] = 1)
   const newStatus = ++status[testIdentifier]
   if (newStatus == SLACK_AT_FAILURE_COUNT) {
     postToSlack(`Noot noot! Toskawatch has failed twice in row for ${testIdentifier} :penguin:`)
   }
 }
 
-const handleTestSuccess = (testIdentifier) => {
+const handleTestSuccess = testIdentifier => {
   console.log(`SUCCESS ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (status[testIdentifier] >= SLACK_AT_FAILURE_COUNT) {
     postToSlack(`Doot doot! ${newStatus} works! :penguin:`)
@@ -31,7 +31,7 @@ const handleTestSuccess = (testIdentifier) => {
   status[testIdentifier] = 0
 }
 
-const runTests = async (spec) => {
+const runTests = async spec => {
   const testStatus = await cypress.run({
     project: __dirname,
     spec
@@ -46,7 +46,7 @@ const runTests = async (spec) => {
   })
 }
 
-const asyncWait = time => new Promise((resolve) => setTimeout(() => resolve(), time))
+const asyncWait = time => new Promise(resolve => setTimeout(() => resolve(), time))
 
 const runPinger = async () => {
   try {
@@ -63,4 +63,4 @@ const runPinger = async () => {
   }
 }
 
-module.exports = runPinger;
+module.exports = runPinger

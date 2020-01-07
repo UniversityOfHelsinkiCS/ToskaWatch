@@ -1,6 +1,6 @@
 describe('Oodikone', () => {
   it('shows welcome to oodikone', () => {
-    cy.visit("https://oodikone-staging.cs.helsinki.fi/")
+    cy.visit('https://oodikone-staging.cs.helsinki.fi/')
     cy.url().should('include', 'login-test.it.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username_test'))
