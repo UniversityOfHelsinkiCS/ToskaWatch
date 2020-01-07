@@ -1,10 +1,10 @@
-const cypress = require('cypress')
-const axios = require('axios')
+import cypress from 'cypress'
+import axios from 'axios'
 
-const status = {}
+const status: { [spec: string]: number } = {}
 const SLACK_AT_FAILURE_COUNT = 2
 
-const postToSlack = async (text = 'Toskawatch broke') => {
+const postToSlack = async (text: string = 'Toskawatch broke') => {
   if (!process.env.SLACK_HOOK) return
 
   try {
@@ -14,7 +14,7 @@ const postToSlack = async (text = 'Toskawatch broke') => {
   }
 }
 
-const handleTestFailure = testIdentifier => {
+const handleTestFailure = (testIdentifier: string) => {
   console.log(`FAIL ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (!status[testIdentifier]) return (status[testIdentifier] = 1)
   const newStatus = ++status[testIdentifier]
@@ -23,7 +23,7 @@ const handleTestFailure = testIdentifier => {
   }
 }
 
-const handleTestSuccess = testIdentifier => {
+const handleTestSuccess = (testIdentifier: string) => {
   console.log(`SUCCESS ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (status[testIdentifier] >= SLACK_AT_FAILURE_COUNT) {
     postToSlack(`Doot doot! ${newStatus} works! :penguin:`)
@@ -31,7 +31,7 @@ const handleTestSuccess = testIdentifier => {
   status[testIdentifier] = 0
 }
 
-const runTests = async spec => {
+const runTests = async (spec: string) => {
   const testStatus = await cypress.run({
     project: __dirname,
     spec
@@ -46,9 +46,9 @@ const runTests = async spec => {
   })
 }
 
-const asyncWait = time => new Promise(resolve => setTimeout(() => resolve(), time))
+const asyncWait = (time: number) => new Promise(resolve => setTimeout(() => resolve(), time))
 
-const runPinger = async () => {
+export const runPinger = async () => {
   try {
     await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
     await asyncWait(10000)
@@ -62,5 +62,3 @@ const runPinger = async () => {
     process.exit(1)
   }
 }
-
-module.exports = runPinger
