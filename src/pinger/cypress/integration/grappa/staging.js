@@ -7,8 +7,9 @@ describe('Grappa', () => {
     cy.get('#password').type(Cypress.env('password'))
 
     cy.contains('Login').click()
-    cy.url().should('include', 'grappa')
+    cy.acceptShibboDisclosureIfShown()
 
+    cy.url().should('include', 'grappa')
     cy.contains('Jami')
   })
 })

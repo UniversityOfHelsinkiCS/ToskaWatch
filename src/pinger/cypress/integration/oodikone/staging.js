@@ -7,8 +7,9 @@ describe('Oodikone', () => {
     cy.get('#password').type(Cypress.env('password_test'))
 
     cy.contains('Login').click()
-    cy.url().should('include', 'oodikone')
+    cy.acceptShibboDisclosureIfShown()
 
+    cy.url().should('include', 'oodikone')
     cy.contains('oodikone')
   })
 })
