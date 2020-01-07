@@ -26,7 +26,7 @@ const handleTestFailure = (testIdentifier: string) => {
 const handleTestSuccess = (testIdentifier: string) => {
   console.log(`SUCCESS ${testIdentifier} with ${status[testIdentifier]} failures`)
   if (status[testIdentifier] >= SLACK_AT_FAILURE_COUNT) {
-    postToSlack(`Doot doot! ${newStatus} works! :penguin:`)
+    postToSlack(`Doot doot! ${testIdentifier} works! :penguin:`)
   }
   status[testIdentifier] = 0
 }
