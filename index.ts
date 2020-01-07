@@ -2,11 +2,16 @@ if (process.env.NODE_ENV === 'development') {
   require('dotenv').config()
 }
 import { scheduleJob } from 'node-schedule'
-import { runPinger } from './src/pinger'
+import { runPinger, runReminderChecks } from './src/pinger'
 
-const job = scheduleJob('Pinger', '*/10 * * * *', time => {
+const pingerJob = scheduleJob('Pinger', '*/10 * * * *', time => {
   console.log(`Ran pinger at ${time}`)
   runPinger()
 })
 
-console.log('Started', job.name)
+const reminderJob = scheduleJob('Reminder', '55 10 * * *', time => {
+  console.log(`Ran reminder job at ${time}`)
+  runReminderChecks()
+})
+
+console.log('Started jobs: ', [pingerJob, reminderJob].map(j => j.name).join(', '))
