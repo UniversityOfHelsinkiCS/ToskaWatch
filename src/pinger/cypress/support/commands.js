@@ -25,10 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('acceptShibboDisclosureIfShown', () => {
-    // keep test broken until reminder test works
-//   cy.get('body').then($body => {
-//     if ($body.find('h2:contains("Accepting the disclosure of your information")').length > 0) {
-//       cy.contains('button', 'Accept').click()
-//     }
-//   })
+  cy.get('body').then($body => {
+    if ($body.find('h2:contains("Accepting the disclosure of your information")').length > 0) {
+      cy.contains('button', 'Accept').click()
+    }
+  })
 })
