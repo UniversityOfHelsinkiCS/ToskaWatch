@@ -1,4 +1,8 @@
 {
   "projectId": "c8bfes",
-  "defaultCommandTimeout": 10000
+  "defaultCommandTimeout": 10000,
+  "blacklistHosts": [
+    "www.googletagmanager.com",
+    "www.google-analytics.com"
+  ]
 }
