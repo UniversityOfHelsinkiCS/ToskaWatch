@@ -2,7 +2,7 @@ import cypress from 'cypress'
 import axios from 'axios'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SLACK_AT_FAILURE_COUNT = 1
+const SLACK_AT_FAILURE_COUNT = 2
 
 const status = new (class Statuses {
   failCounts: { [specName: string]: number | undefined } = {}
