@@ -2,7 +2,7 @@ import cypress from 'cypress'
 import axios from 'axios'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
-const SLACK_AT_FAILURE_COUNT = 2
+const SLACK_AT_FAILURE_COUNT = 1
 
 const status = new (class Statuses {
   failCounts: { [specName: string]: number | undefined } = {}
@@ -52,12 +52,29 @@ const postToSlack = async (data: { text?: string; blocks?: any } = { text: 'Tosk
   }
 }
 
+const postToMobvitaSlack = async (data: { text?: string; blocks?: any } = { text: 'Toskawatch broke' }) => {
+  if (!process.env.MOBVITA_HOOK) return
+
+  try {
+    await axios.post(process.env.MOBVITA_HOOK, data)
+  } catch (err) {
+    console.log('Failed to send to slack (mobvita_notifications):', err.message)
+  }
+}
+
 const handleTestFailure = (testIdentifier: string) => {
   status.markFailure(testIdentifier)
   const { failCount, firstFail } = status.getStatus(testIdentifier)
 
   console.log(`FAIL ${testIdentifier} with ${failCount} failures, first failed on ${firstFail?.toISOString()}`)
   if (failCount == SLACK_AT_FAILURE_COUNT) {
+
+    if (testIdentifier === "mobvita/production.js") {
+      postToMobvitaSlack({
+        text: `Noot noot! Toskawatch has failed twice in row for ${testIdentifier} :penguin: This test failed for the first time on ${firstFail?.toISOString()}`
+      })
+    }
+
     postToSlack({
       text: `Noot noot! Toskawatch has failed twice in row for ${testIdentifier} :penguin: This test failed for the first time on ${firstFail?.toISOString()}`
     })
@@ -76,6 +93,13 @@ const handleTestSuccess = (testIdentifier: string) => {
 
   console.log(`SUCCESS ${testIdentifier} after ${failCount} fails, first failed on ${firstFail?.toISOString()}`)
   if (failCount >= SLACK_AT_FAILURE_COUNT) {
+
+    if (testIdentifier === "mobvita/production.js") {
+      postToMobvitaSlack({
+        text: `Doot doot! ${testIdentifier} works again! :penguin: This test began failing on ${firstFail?.toISOString()}`
+      })
+    }
+
     postToSlack({
       text: `Doot doot! ${testIdentifier} works again! :penguin: This test began failing on ${firstFail?.toISOString()}`
     })
@@ -136,7 +160,7 @@ export const runReminderChecks = async () => {
           type: 'mrkdwn',
           text: `*Noot noot!* ${
             failing.length === 1 ? 'This Toskawatch check is' : 'These Toskawatch checks are'
-          } still failing!`
+            } still failing!`
         }
       },
       {
@@ -175,17 +199,17 @@ const asyncWait = (time: number) => new Promise(resolve => setTimeout(() => reso
 
 export const runPinger = async () => {
   try {
-    await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
-    await asyncWait(10000)
-    await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
-    await asyncWait(10000)
-    await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
-    await asyncWait(10000)
-    await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
-    await asyncWait(10000)
+    // await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
+    // await asyncWait(10000)
+    // await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
+    // await asyncWait(10000)
+    // await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
+    // await asyncWait(10000)
+    // await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
+    // await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/mobvita/production.js`)
-    await asyncWait(10000)
-    await runTests(`${__dirname}/cypress/integration/pajat/production.js`)
+    // await asyncWait(10000)
+    // await runTests(`${__dirname}/cypress/integration/pajat/production.js`)
   } catch (e) {
     console.log('Failed to run tests', e)
     process.exit(1)
