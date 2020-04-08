@@ -11,6 +11,7 @@ describe('Mobvita', function() {
     })
 
     it('can log in as user', function() {
+      cy.reload()
       cy.get('input:first')
         .type('elbert.alyas@plutocow.com')
       cy.get('input:last')
