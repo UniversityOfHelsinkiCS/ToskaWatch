@@ -4,6 +4,7 @@ describe('Mobvita', function() {
     })
 
     it('can log in as anonymous', function() {
+      cy.reload()
       cy.get('[data-cy=login-anon]')
         .click()
       cy.get('[data-cy=choose-lang]')
@@ -39,7 +40,7 @@ describe('Mobvita', function() {
 
       it('can start random practice', function() {
         cy.get('[data-cy=practice-now]').click()
-        cy.get('[data-cy=start-random]').click()
+        cy.get('[data-cy=start-random]', { timeout: 10000 }).click()
         cy.get('[data-cy=practice-view]')
       })
     })
