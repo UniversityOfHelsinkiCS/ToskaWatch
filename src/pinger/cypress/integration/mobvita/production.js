@@ -1,6 +1,6 @@
 describe('Mobvita', function () {
   this.beforeEach(function () {
-    cy.visit('https://mobvita.cs.helsinki.fi')
+    cy.visit('https://revita.cs.helsinki.fi')
   })
 
   it('can log in and stories are fetched corretly', function () {
