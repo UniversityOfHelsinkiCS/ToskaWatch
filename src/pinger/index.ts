@@ -199,17 +199,17 @@ const asyncWait = (time: number) => new Promise(resolve => setTimeout(() => reso
 
 export const runPinger = async () => {
   try {
-    // await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
-    // await asyncWait(10000)
-    // await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
-    // await asyncWait(10000)
-    // await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
-    // await asyncWait(10000)
-    // await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
-    // await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/grappa/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/grappa/staging.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/oodikone/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
+    await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/mobvita/production.js`)
-    // await asyncWait(10000)
-    // await runTests(`${__dirname}/cypress/integration/pajat/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/pajat/production.js`)
   } catch (e) {
     console.log('Failed to run tests', e)
     process.exit(1)
