@@ -4,14 +4,12 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Publish
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: toska/toskawatch
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+      - uses: actions/checkout@master
+      - name: Publish to DockerHub
+        uses: docker/build-push-action@v1.1.0
+        with:
+          repository: toska/toskawatch
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
