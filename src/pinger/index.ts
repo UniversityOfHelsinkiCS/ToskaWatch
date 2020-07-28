@@ -208,6 +208,8 @@ export const runPinger = async () => {
     await runTests(`${__dirname}/cypress/integration/oodikone/staging.js`)
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/mobvita/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/fuksilaiterekisteri/production.js`)
     //await asyncWait(10000)
     //await runTests(`${__dirname}/cypress/integration/pajat/production.js`)
   } catch (e) {
