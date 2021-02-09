@@ -212,6 +212,10 @@ export const runPinger = async () => {
     await runTests(`${__dirname}/cypress/integration/fuksilaiterekisteri/production.js`)
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/importer/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/suotar/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/suotar/mooc-api.js`)
   } catch (e) {
     console.log('Failed to run tests', e)
     process.exit(1)
