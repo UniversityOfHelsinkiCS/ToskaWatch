@@ -112,6 +112,7 @@ const runTests = async (spec: string) => {
     spec
   })
 
+  // @ts-ignore
   testStatus.runs.forEach(run => {
     if (run.stats.failures) {
       handleTestFailure(run.spec.name)

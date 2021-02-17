@@ -152,6 +152,8 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+docker-compose.prod.yml
+
 # End of https://www.gitignore.io/api/node,macos,linux,windows
 cypress/fixtures
 cypress/videos
