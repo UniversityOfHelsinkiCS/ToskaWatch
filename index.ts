@@ -4,7 +4,7 @@ if (process.env.NODE_ENV === 'development') {
 import { scheduleJob } from 'node-schedule'
 import { runPinger, runReminderChecks } from './src/pinger'
 
-const pingerJob = scheduleJob('Pinger', '*/10 * * * *', time => {
+const pingerJob = scheduleJob('Pinger', '*/15 * * * *', time => {
   console.log(`Ran pinger at ${time}`)
   runPinger()
 })
