@@ -1,4 +1,4 @@
-describe('Fuksilaiterekisteri', () => {
+describe('Palaute', () => {
   it('shows page title', () => {
     cy.visit('https://study.cs.helsinki.fi/palaute')
     cy.url().should('include', 'login.helsinki.fi')
