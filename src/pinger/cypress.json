@@ -2,7 +2,6 @@
   "projectId": "c8bfes",
   "defaultCommandTimeout": 10000,
   "watchForFileChanges": false,
-  "chromeWebSecurity": false,
   "video": false,
   "screenshotOnRunFailure": false,
   "blockHosts": [
