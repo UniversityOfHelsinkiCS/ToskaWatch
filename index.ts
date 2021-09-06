@@ -15,3 +15,4 @@ const reminderJob = scheduleJob('Reminder', '55 10 * * *', time => {
 })
 
 console.log('Started jobs: ', [pingerJob, reminderJob].map(j => j.name).join(', '))
+runPinger()
