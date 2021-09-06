@@ -1,6 +1,6 @@
 describe('Palaute', () => {
   it('shows page title', () => {
-    cy.visit('https://study.cs.helsinki.fi/palaute')
+    cy.visit('https://coursefeedback.helsinki.fi')
     cy.url().should('include', 'login.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username'))
