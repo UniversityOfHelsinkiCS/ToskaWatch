@@ -1,6 +1,7 @@
 describe('Palaute', () => {
-  it('shows page title', () => {
-    cy.visit('https://coursefeedback.helsinki.fi')
+  // If test course is no longer visible, go check db and update dates
+  it('shows page title and test course', () => {
+    cy.visit('https://coursefeedback.helsinki.fi/courses')
     cy.url().should('include', 'login.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username'))
@@ -10,5 +11,6 @@ describe('Palaute', () => {
     cy.acceptShibboDisclosureIfShown()
 
     cy.contains('Norppa')
+    cy.contains('TEST-1 Test course')
   })
 })
