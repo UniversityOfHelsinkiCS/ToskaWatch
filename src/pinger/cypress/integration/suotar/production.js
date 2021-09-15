@@ -1,6 +1,6 @@
 describe('Suotar', () => {
   it('frontpage loads', () => {
-    cy.visit('https://study.cs.helsinki.fi/suoritustarkistin/')
+    cy.visit('https://opetushallinto.cs.helsinki.fi/suoritustarkistin/')
     cy.url().should('include', 'login.helsinki.fi')
 
     cy.get('#username').type(Cypress.env('username'))
