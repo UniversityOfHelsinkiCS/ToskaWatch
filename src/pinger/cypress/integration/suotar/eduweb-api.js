@@ -10,7 +10,7 @@ describe('Eduweb-api', () => {
       expect(response.body).to.have.length.gt(0)
 
       const instance = response.body[0]
-      expect(instance).to.have.property('oodi_id')
+      expect(instance).to.have.property('url')
     })
   })
 })
