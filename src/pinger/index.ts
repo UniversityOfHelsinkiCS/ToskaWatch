@@ -214,6 +214,8 @@ export const runPinger = async () => {
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/importer/production.js`)
     await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/importer/staging.js`)
+    await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/suotar/production.js`)
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/suotar/mooc-api.js`)
@@ -221,6 +223,8 @@ export const runPinger = async () => {
     await runTests(`${__dirname}/cypress/integration/suotar/eduweb-api.js`)
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/palaute/production.js`)
+    await asyncWait(10000)
+    await runTests(`${__dirname}/cypress/integration/lomake/production.js`)
     await asyncWait(10000)
     await runTests(`${__dirname}/cypress/integration/lomake/production.js`)
   } catch (e) {
