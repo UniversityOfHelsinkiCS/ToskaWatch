@@ -109,7 +109,11 @@ const handleTestSuccess = (testIdentifier: string) => {
 const runTests = async (spec: string) => {
   const testStatus = await cypress.run({
     project: __dirname,
-    spec
+    spec,
+    config: {
+      video: true,
+      trashAssetsBeforeRuns: false
+    }
   })
 
   // @ts-ignore
