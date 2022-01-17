@@ -10,6 +10,6 @@ describe('Grappa', () => {
     cy.acceptShibboDisclosureIfShown()
 
     cy.url().should('include', 'grappa')
-    cy.contains('Gert')
+    cy.contains('Matti Luukkainen')
   })
 })
