@@ -1,5 +1,5 @@
 describe('Oodikone', () => {
-  it('shows welcome to oodikone', () => {
+  it('shows front page of oodikone', () => {
     cy.visit('https://oodikone.helsinki.fi')
     cy.url().should('include', 'login.helsinki.fi')
 
@@ -10,6 +10,6 @@ describe('Oodikone', () => {
     cy.acceptShibboDisclosureIfShown()
 
     cy.url().should('include', 'oodikone')
-    cy.contains('Welcome to Oodikone!')
+    cy.contains('statistics')
   })
 })
